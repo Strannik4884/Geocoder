@@ -1,15 +1,22 @@
 <?php
-    require_once('../src/Config.php');
+    require_once('../src/GeocoderAPI.php');
+    require_once('../src/Exceptions/APIException.php');
+    require_once('../src/Exceptions/ConfigException.php');
 
     // check post body
     if(isset($_POST['address'])) {
         $address = $_POST['address'];
-        try {
-            // load config file
-            $config = new Config();
+        try{
+            $geocoder = new GeocoderAPI();
+            echo json_encode(['successful' => $geocoder->searchAddress($address)], JSON_UNESCAPED_UNICODE);
         }
-        catch (ConfigException $exception){
-            echo json_encode(['error' => $exception->getMessage()]);
+        catch (APIException $exception)
+        {
+
+        }
+        catch (ConfigException $exception)
+        {
+
         }
     }
     else{
