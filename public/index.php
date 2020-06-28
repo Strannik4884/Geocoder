@@ -1,4 +1,4 @@
-<!DOCTYPEhtml>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -33,6 +33,8 @@
                 </div>
             </div>
         </form>
+        <!-- GeoObjects list -->
+        <ul id="geoobjects_list" class="collection" style="display: none"></ul>
     </div>
 </main>
 <!-- Footer -->
