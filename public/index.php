@@ -15,7 +15,7 @@
 </head>
 <body>
 <main>
-    <!-- Search address form -->
+    <!-- Address form -->
     <div class="container">
         <div class="valign-wrapper" style="flex: 1;">
             <div class="container valign" style="max-width: 600px;">

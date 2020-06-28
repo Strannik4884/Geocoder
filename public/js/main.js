@@ -14,7 +14,7 @@ $(document).ready(function () {
   );
 
   // form validation
-  $("#feedback_form").validate({
+  $("#address_form").validate({
     rules: {
       address: {
         required: true,
@@ -24,7 +24,7 @@ $(document).ready(function () {
     // error messages
     messages: {
       address:{
-        required: "Введите адрес!",
+        required: "Введите адрес",
       }
     },
     // display errors
@@ -39,14 +39,14 @@ $(document).ready(function () {
     }
   });
 
-  // feedback form submit event handler
+  // address form submit event handler
   $('#address_form').submit(function (event) {
     // get form
     let addressForm = $('#address_form');
     // handle default action
     event.preventDefault();
     addressForm.validate();
-    // if feedback form is valid
+    // if address form is valid
     if(addressForm.valid()){
       $.ajax({
         type: "POST",
@@ -60,10 +60,9 @@ $(document).ready(function () {
           const response = JSON.parse(result);
           // if successful
           if(typeof(response['successful']) != "undefined" && response['successful'] !== null){
-            // clear and hide feedback form
+            // clear and hide address form
             document.getElementById("address_form").reset();
             $('.character-counter').remove();
-            document.getElementById("address_form").style.display = "none";
             // show result
           }
           // if error
