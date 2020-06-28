@@ -1,5 +1,5 @@
 <?php
-    require_once ('../src/Database.php');
+    require_once('../src/Config.php');
     require_once ('../src/Email.php');
 
     // check post body
@@ -12,7 +12,7 @@
         $response_date = date("H:i:s d.m.Y", strtotime('+1 hours +30minutes'));
         try {
             // connect to database
-            $database = new Database();
+            $database = new Config();
             $connection = $database->connect();
             // query string
             $prepared = $connection->prepare("INSERT INTO request (request_date, request_person_name, request_person_email, request_person_phone, request_person_comment) VALUES
