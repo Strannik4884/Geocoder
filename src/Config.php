@@ -12,17 +12,17 @@ class Config
     function __construct() {
         // check config file
         if (!is_file(self::configFile)) {
-            throw (new ConfigException("Can't load config file"));
+            throw new ConfigException("Can't load config file");
         }
         // read config file
         $ini_array = parse_ini_file(self::configFile, true);
         // check mandatory variables in config file
         if (!isset($ini_array['API']['key']) and !isset($ini_array['API']['domain'])) {
-            throw (new ConfigException("Config file corrupted"));
+            throw new ConfigException("Config file corrupted");
         }
         // check config variables for empty
         if (empty($ini_array['API']['key']) and empty($ini_array['API']['domain'])) {
-            throw (new ConfigException("You must set API config variables"));
+            throw new ConfigException("You must set API config variables");
         }
         // set properties
         $this->key = $ini_array['API']['key'];
