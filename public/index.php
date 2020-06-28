@@ -19,7 +19,7 @@
     <div class="container">
         <div class="valign-wrapper" style="flex: 1;">
             <div class="container valign" style="max-width: 600px;">
-                <form class="col s12" id="feedback_form">
+                <form class="col s12" id="address_form">
                     <div class="row">
                         <div class="col s12 black-text center-align">
                             <h5>Введите адрес</h5>
@@ -27,8 +27,8 @@
                     </div>
                     <div class="row">
                         <div class="input-field col s9">
-                            <textarea name="person_comment" id="person_comment" class="materialize-textarea black-text" maxlength="512" data-length="512" required="" aria-required="true"></textarea>
-                            <label for="person_comment" class="black-text">Адрес</label>
+                            <textarea name="address" id="address" class="materialize-textarea black-text" maxlength="512" data-length="512" required="" aria-required="true"></textarea>
+                            <label for="address" class="black-text">Адрес</label>
                         </div>
                         <div class="input-field col s3">
                             <button class="btn blue darken-1 waves-effect waves-light" type="submit" style="float: right">Найти<i class="material-icons right">search</i></button>
