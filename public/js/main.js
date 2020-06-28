@@ -3,16 +3,6 @@ $(document).ready(function () {
   // create textarea character counter
   $('input#input_text, textarea#address').characterCounter();
 
-  // add regexp method to form validation rules
-  $.validator.addMethod(
-      "regexp",
-      function(value, element, regexp) {
-        const re = new RegExp(regexp);
-        return this.optional(element) || re.test(value);
-      },
-      "Regular expression failed"
-  );
-
   // form validation
   $("#address_form").validate({
     rules: {
@@ -48,6 +38,7 @@ $(document).ready(function () {
     addressForm.validate();
     // if address form is valid
     if(addressForm.valid()){
+      // use ajax to send form
       $.ajax({
         type: "POST",
         url: "geocoder.php",
@@ -59,11 +50,41 @@ $(document).ready(function () {
           // parse response
           const response = JSON.parse(result);
           // if successful
-          if(typeof(response['successful']) != "undefined" && response['successful'] !== null){
-            // clear and hide address form
+          if(typeof(response['successful']) != "undefined" && response['successful'] !== null) {
+            // clear address form
             document.getElementById("address_form").reset();
+            // hide textarea character counter
             $('.character-counter').remove();
-            // show result
+            $('input#input_text, textarea#address').characterCounter();
+            // clear response objects list
+            document.getElementById("geoobjects_list").innerHTML = "";
+            // show response objects in list
+            for (let item in response['successful']) {
+              document.getElementById("geoobjects_list").innerHTML += "" +
+                  "<li id=\"geoobjects_list\" class=\"collection-item\">\n" +
+                  "                <div class=\"row\">\n" +
+                  "                    <div class=\"col s12\">\n" +
+                  "                        Структурированный адрес: " + response['successful'][item]['structuredAddress'] +
+                  "                    </div>\n" +
+                  "                </div>\n" +
+                  "                <div class=\"row\">\n" +
+                  "                    <div class=\"col s12\">\n" +
+                  "                        Координаты: " + response['successful'][item]['coordinates'] +
+                  "                    </div>\n" +
+                  "                </div>\n" +
+                  "                <div class=\"row\">\n" +
+                  "                    <div class=\"col s12\">\n" +
+                  "                        Ближайшее метро: " + response['successful'][item]['metroName'] +
+                  "                    </div>\n" +
+                  "                </div>\n" +
+                  "                <div class=\"row\">\n" +
+                  "                    <div class=\"col s12\">\n" +
+                  "                        Координаты ближайшего метро: " + response['successful'][item]['metroCoordinates'] +
+                  "                    </div>\n" +
+                  "                </div>\n" +
+                  "            </li>"
+            }
+            document.getElementById("geoobjects_list").style.display = "";
           }
           // if error
           else if(typeof(response['error']) != "undefined" && response['error'] !== null){
@@ -71,7 +92,7 @@ $(document).ready(function () {
           }
         },
         error: function () {
-          alert('Ошибка при отправке формы - попробуйте позже!');
+          alert('Ошибка при отправке запроса - попробуйте позже!');
         }
       });
     }
