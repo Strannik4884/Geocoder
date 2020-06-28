@@ -1,5 +1,5 @@
 <?php
-require_once('Exceptions/ConfigException.php');
+require_once ('Exceptions/ConfigException.php');
 
 class Config
 {
@@ -19,7 +19,7 @@ class Config
         if (!isset($ini_array['API']['key']) and !isset($ini_array['API']['domain'])) {
             throw (new ConfigException("Config file corrupted"));
         }
-        // check empty config variables
+        // check config variables for empty
         if (empty($ini_array['API']['key']) and empty($ini_array['API']['domain'])) {
             throw (new ConfigException("You must set API config variables"));
         }
@@ -28,11 +28,13 @@ class Config
         $this->domain = $ini_array['API']['domain'];
     }
 
+    // get api key
     public function getKey(): string
     {
         return $this->key;
     }
 
+    // get api domain
     public function getDomain(): string
     {
         return $this->domain;
